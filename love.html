@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* لمسة تفاعلية ناعمة */
+            user-select: none;
         }
         body {
             font-family: 'Cairo', sans-serif;
@@ -21,7 +21,6 @@
             color: #fff;
             cursor: default;
         }
-        /* خلفية ثابتة مع قلوب عائمة أصلية */
         .heart-bg {
             position: fixed;
             top: 0;
@@ -43,8 +42,6 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
             100% { transform: translateY(-130vh) rotate(420deg); opacity: 0; }
         }
-
-        /* كونتينر عام */
         .container {
             position: relative;
             z-index: 10;
@@ -55,8 +52,7 @@
             align-items: center;
             padding: 20px;
         }
-
-        /* ========== شاشة الدخول الجديدة – تفاعلية جداً ========= */
+        /* ========== شاشة الدخول (بدون تعديل) ========= */
         .password-screen {
             background: rgba(15, 10, 28, 0.65);
             backdrop-filter: blur(18px);
@@ -200,7 +196,6 @@
             align-items: center;
             gap: 8px;
         }
-        /* القلوب التفاعلية (تظهر وتختفي) */
         .dy-heart {
             position: fixed;
             pointer-events: none;
@@ -213,7 +208,6 @@
             0% { opacity: 1; transform: translateY(0) scale(0.6); }
             100% { opacity: 0; transform: translateY(-120px) scale(1.3); }
         }
-        /* باقي الصفحات كما هي مع تحسينات طفيفة */
         .memories-section, .love-letter-page {
             display: none;
             width: 100%;
@@ -251,21 +245,161 @@
         .memory-card:hover { transform: translateY(-10px) scale(1.02); border-color: #ff8ca8; }
         .memory-img { width: 100%; height: 250px; object-fit: contain; background: #2a1e3c; padding: 10px; }
         .video-container video { width: 100%; max-height: 550px; object-fit: contain; background: #000; border-radius: 48px; border: 2px solid #ffb7c5; }
-        .huge-btn { background: linear-gradient(120deg, #ff4d6d, #ff9f4a); padding: 18px 50px; font-size: 2rem; border-radius: 80px; cursor: pointer; }
-        .second-page-message { background: rgba(0,0,0,0.7); border-radius: 50px; padding: 35px 30px; border-right: 8px solid #ff8c94; font-size: 1.2rem; line-height: 1.8; text-align: right; }
-        .back-btn { background: rgba(255,255,255,0.2); border: 2px solid #ffa5bb; padding: 12px 30px; font-size: 1.3rem; border-radius: 50px; cursor: pointer; }
+        .video-caption {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            color: #ffe6f0;
+            text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff8ca8;
+            animation: gentleGlow 1.5s infinite alternate;
+            letter-spacing: 1px;
+        }
+        @keyframes gentleGlow {
+            0% { text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff8ca8; opacity: 0.9; }
+            100% { text-shadow: 0 0 18px #ff7595, 0 0 30px #ffa5c0; opacity: 1; }
+        }
+        .big-action-btn {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0 30px;
+        }
+        .huge-btn {
+            background: linear-gradient(135deg, #ff416c, #ff9f4a);
+            border: none;
+            padding: 18px 55px;
+            font-size: 2rem;
+            font-weight: 800;
+            border-radius: 80px;
+            cursor: pointer;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 12px 25px rgba(255, 65, 108, 0.5);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        .huge-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 18px 35px rgba(255, 80, 120, 0.7);
+            background: linear-gradient(135deg, #ff5a7c, #ffb25a);
+        }
+        .huge-btn:active {
+            transform: scale(0.97);
+        }
+        .huge-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(25deg);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        .huge-btn:hover::after {
+            opacity: 0.4;
+            animation: shimmer 0.8s ease-out;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateX(100%) rotate(25deg); opacity: 0; }
+        }
+        .romantic-footer {
+            text-align: center;
+            margin-top: 45px;
+            font-size: 0.9rem;
+            color: #ffccd5;
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            width: auto;
+            padding: 8px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            border: 1px solid rgba(255,160,180,0.4);
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* ===== زر رجوع للذكريات - معدل: أكبر وتفاعلي جداً ===== */
+        .back-btn {
+            background: linear-gradient(135deg, #ff7b9c, #ffaa77);
+            border: none;
+            padding: 16px 42px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-radius: 70px;
+            cursor: pointer;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 22px rgba(255, 100, 130, 0.5);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .back-btn:hover {
+            transform: scale(1.07);
+            background: linear-gradient(135deg, #ff8cab, #ffc185);
+            box-shadow: 0 18px 32px rgba(255, 120, 150, 0.7);
+        }
+        .back-btn:active {
+            transform: scale(0.96);
+        }
+        .back-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(25deg);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        .back-btn:hover::after {
+            opacity: 0.5;
+            animation: shimmerBack 0.7s ease-out;
+        }
+        @keyframes shimmerBack {
+            0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateX(100%) rotate(25deg); opacity: 0; }
+        }
+        
         @media (max-width: 650px) {
             .password-screen { padding: 30px 20px; margin: 20px; }
             .password-screen h2 { font-size: 1.8rem; }
             .heart-icon-lock { font-size: 65px; }
             .love-btn { font-size: 1.2rem; width: 95%; }
+            .video-caption { font-size: 1.5rem; }
+            .huge-btn { font-size: 1.4rem; padding: 12px 30px; gap: 10px; }
+            .romantic-footer { font-size: 0.75rem; padding: 5px 18px; }
+            .back-btn { font-size: 1.3rem; padding: 12px 30px; gap: 10px; }
         }
     </style>
 </head>
 <body>
 <div class="heart-bg" id="heartBg"></div>
 <div class="container" id="appContainer">
-    <!-- شاشة الدخول الساحرة -->
+    <!-- شاشة الدخول (بدون تعديل) -->
     <div id="passwordScreen" class="password-screen">
         <div class="heart-icon-lock">
             <i class="fas fa-heart-broken"></i> <i class="fas fa-heart"></i> <i class="fas fa-heartbeat"></i>
@@ -286,7 +420,7 @@
         <div style="margin-top: 15px; font-size: 0.85rem;">✨ أتركي قلبك يلمس الحروف .. ♡ ✨</div>
     </div>
 
-    <!-- صفحة الذكريات الأساسية (نفسها) -->
+    <!-- صفحة الذكريات -->
     <div id="memoriesPage" class="memories-section">
         <div class="audio-player">
             <div class="audio-title"><i class="fas fa-music"></i> 🎵 ميادة الحناوي - بينت الحب عليا 🎵</div>
@@ -320,15 +454,17 @@
                     <source src="video.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="video-caption">🤍 أسعد لحظات حياتي كانت مع الفيديو دا 🤍🤍</div>
+            <div class="video-caption">🤍 أسعد لحظات حياتي معك 🤍</div>
         </div>
         <div class="big-action-btn">
             <button id="bigRedirectBtn" class="huge-btn"><i class="fas fa-hand-point-left"></i> دوس هنا <i class="fas fa-arrow-left"></i></button>
         </div>
-        <footer>❤️ كل ذكرى معك تاج على رأسي ❤️</footer>
+        <footer>
+            <div class="romantic-footer">❤️ كل ذكرى معك تاج على رأسي ❤️</div>
+        </footer>
     </div>
 
-    <!-- الصفحة الثانية (رسالة) -->
+    <!-- الصفحة الثانية (رسالة) - زر الرجوع معدل بشكل كبير وتفاعلي -->
     <div id="loveLetterPage" class="love-letter-page">
         <div class="second-page-message">
             <p>يا سهيلة..</p>
@@ -340,7 +476,8 @@
             <p>سهيلة.. إنتي أماني، ومهما طالت بينا الأيام، آخرتنا بيت واحد سوا ❤️</p>
         </div>
         <div style="text-align: center;">
-            <button id="backToMemoriesBtn" class="back-btn"><i class="fas fa-arrow-right"></i> رجوع للذكريات</button>
+            <!-- الزر الجديد أكبر وأكثر تفاعلاً -->
+            <button id="backToMemoriesBtn" class="back-btn"><i class="fas fa-arrow-right"></i> رجوع للذكريات <i class="fas fa-heart"></i></button>
         </div>
     </div>
 </div>
@@ -374,7 +511,6 @@
         }
     }
 
-    // وظيفة إنشاء قلب متحرك تفاعلي
     function createHeartAt(x, y, customIcon = 'fas fa-heart', color = '#ff6b8b') {
         const heartDiv = document.createElement('i');
         heartDiv.className = customIcon + ' dy-heart';
@@ -408,10 +544,8 @@
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 1500);
             return;
         }
-        // غير مستخدم لكن للتوافق
     }
 
-    // إنشاء قلوب حول منطقة معينة أو عشوائية
     function burstHeartsAroundElement(element, count = 12) {
         if(!element) return;
         const rect = element.getBoundingClientRect();
@@ -432,15 +566,12 @@
         }
     }
 
-    // الوظيفة الخاصة بتفاعل شاشة الدخول: قلوب عند الماوس والضغط والكتابة
+    // تفاعلات شاشة الدخول (بدون تعديل)
     function setupPasswordInteractions() {
         const passwordContainer = document.getElementById('passwordScreen');
         const passInputElem = document.getElementById('passInput');
         const submitBtnElem = document.getElementById('submitPass');
-        
         if(!passwordContainer) return;
-
-        // حركة الماوس - قلوب تتبع المؤشر داخل شاشة الدخول (تفاعل ساحر)
         let mouseMoveTimer;
         passwordContainer.addEventListener('mousemove', (e) => {
             if(mouseMoveTimer) clearTimeout(mouseMoveTimer);
@@ -452,8 +583,6 @@
                 createHeartAt(x, y, 'fas fa-heart', '#ffa5c0');
             }
         });
-
-        // عند النقر في أي مكان على الشاشة - قلوب كثيرة
         passwordContainer.addEventListener('click', (e) => {
             const randCount = Math.floor(Math.random() * 4) + 3;
             for(let i=0;i<randCount;i++){
@@ -464,16 +593,12 @@
                 }, i*20);
             }
         });
-
-        // عند كتابة أي حرف في الحقل -> قلب ينطلق من أسفل الحقل
         passInputElem.addEventListener('keydown', (e) => {
             const rect = passInputElem.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.bottom - 5;
             createHeartAt(x + (Math.random() - 0.5)*40, y - 8, 'fas fa-heart', '#ff99bb');
         });
-        
-        // عند التركيز على الحقل - وابل خفيف
         passInputElem.addEventListener('focus', () => {
             for(let i=0;i<6;i++){
                 setTimeout(()=>{
@@ -482,24 +607,18 @@
                 }, i*50);
             }
         });
-        
-        // زر الدخول مع تأثير فائق
         submitBtnElem.addEventListener('click', (e) => {
             burstHeartsAroundElement(submitBtnElem, 20);
         });
     }
 
-    // دالة التحقق من كلمة السر مع قلوب ناجحة أو فاشلة
-    let successLogin = false;
     function verifyPassword() {
         let val = document.getElementById('passInput').value.trim();
         const errorSpan = document.getElementById('errorMsg');
         if (val.toUpperCase() === "LOVE") {
             errorSpan.innerHTML = '';
-            // تفجير قلوب النجاح
             burstHeartsRandom(45);
             for(let i=0;i<12;i++) setTimeout(() => burstHeartsRandom(6), i*70);
-            // إخفاء شاشة الدخول وإظهار الذكريات
             document.getElementById('passwordScreen').style.display = 'none';
             document.getElementById('memoriesPage').style.display = 'block';
             document.getElementById('loveLetterPage').style.display = 'none';
@@ -509,12 +628,9 @@
             if (timerInterval) clearInterval(timerInterval);
             updateTimer();
             timerInterval = setInterval(updateTimer, 1000);
-            successLogin = true;
-            // موسيقى
         } else {
             errorSpan.innerHTML = '💔 قلبي قال لأ .. كلمة السر الصحيحة "LOVE" 💔 جربي تاني بحب';
             document.getElementById('passInput').value = '';
-            // نثر قلوب حزينة وردية فاتحة
             for(let i=0;i<10;i++){
                 setTimeout(() => {
                     const x = Math.random() * window.innerWidth;
@@ -522,7 +638,6 @@
                     createHeartAt(x, y, 'fas fa-heart-broken', '#ff88aa');
                 }, i*50);
             }
-            // هز الشاشة
             const screen = document.querySelector('.password-screen');
             screen.style.animation = 'shake 0.4s ease-in-out 0s 2';
             setTimeout(() => screen.style.animation = '', 800);
@@ -576,7 +691,6 @@
 
     let timerInterval = null;
 
-    // خلفية غنية بالقلوب المتحركة
     function startBackgroundHearts() {
         const bg = document.getElementById('heartBg');
         setInterval(() => {
@@ -593,7 +707,6 @@
         }, 550);
     }
 
-    // DOM elements events
     window.onload = () => {
         setupPasswordInteractions();
         const submitBtn = document.getElementById('submitPass');
@@ -601,7 +714,6 @@
         submitBtn.addEventListener('click', verifyPassword);
         passInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') verifyPassword(); });
         
-        // أزرار التنقل بين الصفحات
         const bigBtn = document.getElementById('bigRedirectBtn');
         const backBtn = document.getElementById('backToMemoriesBtn');
         const memoriesDiv = document.getElementById('memoriesPage');
@@ -622,19 +734,77 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
-        // إضافة تأثير النقر على البطاقات
         startBackgroundHearts();
-        // إخفاء الصفحات الأخرى في البداية
         document.getElementById('memoriesPage').style.display = 'none';
         document.getElementById('loveLetterPage').style.display = 'none';
-        // لمسة إضافية: قلب كبير عند تحميل الشاشة
         setTimeout(() => burstHeartsRandom(12), 500);
     };
     
-    // إضافة style للهز
     const shakeStyle = document.createElement('style');
     shakeStyle.textContent = `@keyframes shake { 0% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } 100% { transform: translateX(0); } }`;
     document.head.appendChild(shakeStyle);
+</script>
+
+<!-- قلوب متحركة داخل الصفحة الداخلية (إضافة إضافية دون تعديل) -->
+<script>
+(function() {
+    let intervalId = null;
+    function createInnerFloatingHeart(containerElement) {
+        if (!containerElement) return;
+        const rect = containerElement.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+        const heart = document.createElement('i');
+        heart.className = 'fas fa-heart';
+        heart.style.position = 'fixed';
+        heart.style.left = (rect.left + Math.random() * rect.width) + 'px';
+        heart.style.top = (rect.top + Math.random() * rect.height) + 'px';
+        heart.style.color = `hsl(${Math.random() * 30 + 330}, 85%, 70%)`;
+        heart.style.fontSize = (Math.random() * 24 + 14) + 'px';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '9998';
+        heart.style.opacity = '0.8';
+        heart.style.filter = 'drop-shadow(0 0 4px #ff88aa)';
+        heart.style.transition = 'all 3s ease-out';
+        document.body.appendChild(heart);
+        heart.style.transform = `translateY(-${Math.random() * 40 + 20}px) rotate(${Math.random() * 30 - 15}deg)`;
+        heart.style.opacity = '0';
+        setTimeout(() => { if(heart && heart.remove) heart.remove(); }, 2800);
+    }
+    function startFloatingHearts() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(() => {
+            const memoriesPage = document.getElementById('memoriesPage');
+            const lovePage = document.getElementById('loveLetterPage');
+            let activeContainer = null;
+            if (memoriesPage && memoriesPage.style.display === 'block') activeContainer = memoriesPage;
+            else if (lovePage && lovePage.style.display === 'block') activeContainer = lovePage;
+            if (activeContainer) {
+                const heartsCount = Math.floor(Math.random() * 3) + 1;
+                for (let i = 0; i < heartsCount; i++) setTimeout(() => createInnerFloatingHeart(activeContainer), i * 100);
+            }
+        }, 1200);
+    }
+    function stopFloatingHearts() { if(intervalId) { clearInterval(intervalId); intervalId = null; } }
+    function updateHeartStatus() {
+        const memories = document.getElementById('memoriesPage');
+        const love = document.getElementById('loveLetterPage');
+        if ((memories && memories.style.display === 'block') || (love && love.style.display === 'block')) { if (!intervalId) startFloatingHearts(); }
+        else { if (intervalId) stopFloatingHearts(); }
+    }
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const big = document.getElementById('bigRedirectBtn');
+            const back = document.getElementById('backToMemoriesBtn');
+            if (big) big.addEventListener('click', () => setTimeout(updateHeartStatus, 80));
+            if (back) back.addEventListener('click', () => setTimeout(updateHeartStatus, 80));
+            updateHeartStatus();
+        }, 500);
+    });
+    const origVerify = window.verifyPassword;
+    if (typeof verifyPassword === 'function') {
+        window.verifyPassword = function() { origVerify(); setTimeout(updateHeartStatus, 100); };
+    }
+})();
 </script>
 </body>
 </html>
