@@ -119,6 +119,31 @@
             from { opacity: 0; transform: translateY(40px);}
             to { opacity: 1; transform: translateY(0);}
         }
+        /* مشغل الصوت الجميل */
+        .audio-player {
+            background: rgba(0,0,0,0.5);
+            border-radius: 40px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #ff99ae;
+        }
+        .audio-player audio {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 40px;
+            outline: none;
+            background: #2a1e3c;
+        }
+        .audio-player audio::-webkit-media-controls-panel {
+            background: linear-gradient(135deg, #ff4d6d, #ff9f4a);
+        }
+        .audio-title {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #ffccd5;
+        }
+        /* مشغل Spotify */
         .spotify-player {
             background: rgba(0,0,0,0.5);
             border-radius: 32px;
@@ -133,7 +158,6 @@
             max-width: 500px;
             height: 80px;
         }
-        /* الرسالة الأولى - القصيدة المطلوبة */
         .first-message {
             background: rgba(255,255,200,0.1);
             border-radius: 40px;
@@ -330,14 +354,17 @@
 
     <!-- صفحة الذكريات الرئيسية -->
     <div id="memoriesPage" class="memories-section">
-        <!-- 1. مشغل Spotify -->
-        <div class="spotify-player">
-            <div class="music-note"><i class="fab fa-spotify"></i> 🎵 اضغط على زر التشغيل 🎵</div>
-            <iframe src="https://open.spotify.com/embed/track/0snvr4oA4bWIRqkXXpm68K?utm_source=generator&autoplay=0" 
-                    width="100%" height="80" frameborder="0" allow="encrypted-media; clipboard-write; picture-in-picture"></iframe>
+        <!-- مشغل الصوت المحلي (audio1.mp3) بشكل جميل -->
+        <div class="audio-player">
+            <div class="audio-title"><i class="fas fa-music"></i> 🎵 ميادة الحناوي - بينت الحب عليا 🎵</div>
+            <audio id="localAudio" controls preload="auto">
+                <source src="audio1.mp3" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
+            <p style="font-size: 11px; margin-top: 5px;">⭐ بتوصف جزء من اللي عايز اقوله 🥰⭐</p>
         </div>
 
-        <!-- 2. الرسالة الأولى: القصيدة المطلوبة -->
+        <!-- الرسالة الأولى: القصيدة -->
         <div class="first-message">
             <p>
                🤍 سهيلة في القلب <br>
@@ -348,9 +375,9 @@
             </p>
         </div>
 
-        <!-- 3. العداد الزمني من 2020 -->
+        <!-- العداد الزمني من 2020 -->
         <div class="timer-container">
-            <div class="timer-title"><i class="far fa-clock"></i> تاريخ سِحري حين التقت عيني بعينيكِ </div>
+            <div class="timer-title"><i class="far fa-clock"></i> تاريخ سِحري حين التقت عيني بعينيكِ</div>
             <div class="timer-boxes">
                 <div class="time-unit"><div class="time-number" id="years">0</div><div class="time-label">سنوات</div></div>
                 <div class="time-unit"><div class="time-number" id="days">0</div><div class="time-label">أيام</div></div>
@@ -360,10 +387,10 @@
             </div>
         </div>
 
-        <!-- 4. معرض الصور (4 صور) -->
+        <!-- معرض الصور (4 صور) -->
         <div class="gallery" id="galleryContainer"></div>
 
-        <!-- 5. الفيديو الكبير -->
+        <!-- الفيديو الكبير -->
         <div class="video-section">
             <div class="video-container">
                 <video id="memoryVideo" autoplay muted loop playsinline>
@@ -376,7 +403,7 @@
             </div>
         </div>
 
-        <!-- 6. زر "دوس هنا" -->
+        <!-- زر "دوس هنا" -->
         <div class="big-action-btn">
             <button id="bigRedirectBtn" class="huge-btn"><i class="fas fa-hand-point-left"></i> دوس هنا <i class="fas fa-arrow-left"></i></button>
         </div>
@@ -384,14 +411,12 @@
         <footer>❤️ كل ذكرى معك تاج على رأسي ❤️</footer>
     </div>
 
-    <!-- الصفحة الثانية (التي تظهر عند الضغط على دوس هنا) -->
+    <!-- الصفحة الثانية -->
     <div id="loveLetterPage" class="love-letter-page">
         <div class="spotify-player">
             <iframe src="https://open.spotify.com/embed/track/0snvr4oA4bWIRqkXXpm68K?utm_source=generator&autoplay=0" 
                     width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
         </div>
-
-        <!-- الرسالة الطويلة المنقولة إلى هنا -->
         <div class="second-page-message">
             <p>يا سهيلة..</p>
             <p>أنا عارف كويس إني مش سهل.<br>
@@ -408,7 +433,6 @@
             <p>حقك عليا في كل لحظة وجع.. وأنا ممتن لكل ثانية صبر منك.</p>
             <p>سهيلة.. إنتي أماني، ومهما طالت بينا الأيام، آخرتنا بيت واحد سوا ❤️</p>
         </div>
-
         <div style="text-align: center;">
             <button id="backToMemoriesBtn" class="back-btn"><i class="fas fa-arrow-right"></i> رجوع للذكريات</button>
         </div>
@@ -502,6 +526,32 @@
         }
     }
 
+    // تشغيل الأغنية المحلية تلقائياً بعد إدخال كلمة السر
+    function playLocalAudio() {
+        const audio = document.getElementById('localAudio');
+        if (audio) {
+            audio.volume = 0.7;
+            // محاولة التشغيل التلقائي (مع تفاعل المستخدم مضمون لأنه داخل verifyPassword)
+            audio.play().then(() => {
+                console.log("الأغنية تعمل تلقائياً ✅");
+            }).catch(error => {
+                console.warn("التشغيل التلقائي لم ينجح، ستظهر رسالة للمستخدم");
+                const note = document.createElement('div');
+                note.innerText = "🎵 اضغط على زر التشغيل في المشغل أعلاه 🎵";
+                note.style.position = "fixed";
+                note.style.bottom = "20px";
+                note.style.left = "20px";
+                note.style.backgroundColor = "#ff4d6d";
+                note.style.padding = "10px 20px";
+                note.style.borderRadius = "30px";
+                note.style.zIndex = "9999";
+                note.style.fontSize = "0.9rem";
+                document.body.appendChild(note);
+                setTimeout(() => note.remove(), 5000);
+            });
+        }
+    }
+
     function updateTimer() {
         const startDate = new Date(2020, 0, 1, 0, 0, 0);
         const now = new Date();
@@ -543,6 +593,7 @@
             loveDiv.style.display = 'none';
             buildGallery();
             playVideo();
+            playLocalAudio();   // تشغيل الأغنية المحلية تلقائياً
             burstHearts();
             if (timerInterval) clearInterval(timerInterval);
             updateTimer();
